@@ -5,9 +5,9 @@ Application Name: AquaHeads
 Application Description:
     -   This application allows users to set up and manage their aquariums.
 
-Incomplete elements:
-    -   Track data and display as a graph
-    -   Upload content into firebase storage
-    -   Some functionality in regards to manipulating the data
-    -   Forum is not implemented
+Incomplete elements: <br>
+    -   Track data and display as a graph<br>
+    -   Upload content into firebase storage<br>
+    -   Some functionality in regards to manipulating the data<br>
+    -   Forum is not implemented<br>
     -   Profile is not implemented
