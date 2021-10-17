@@ -38,18 +38,18 @@ const Onboarding = (props) => {
             backgroundColor={colors.primary}
             rightButtonLabel="Next"
             rightButtonPress={() => {
-              handlePageChange(1);
+              handlePageChange(2);
             }}
           />
         </View>
         <View key="2">
           <Page
-            backgroundColor={colors.seconday}
+            backgroundColor={colors.secondary}
             iconName="forum-outline"
             title="Join the forum to ask questions, and share your passion with other fish-keeping enthusiasts."
           />
           <Footer
-            backgroundColor={colors.seconday}
+            backgroundColor={colors.secondary}
             rightButtonLabel="Continue"
             rightButtonPress={() => {
               signUp();

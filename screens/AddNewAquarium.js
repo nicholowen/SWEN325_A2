@@ -16,6 +16,7 @@ import {
   createAquariumObject,
 } from "../utility/UtilityFunctions";
 import { colors } from "../utility/Colors";
+import { addAquarium } from "../api/FirebaseApi";
 
 //custom components
 import { TypeRadioButtons } from "../components/TypeRadioButtons";
