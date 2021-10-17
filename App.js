@@ -16,16 +16,19 @@ initialize();
 export default function App() {
   const [firstTime, setFirstTime] = useState(false);
   const [userToken, setUserToken] = useState(null);
+  const [email, setEmail] = useState();
 
   const [userAquariums, setUserAquariums] = useState([]);
 
   //handles authentication states
   const authContext = useMemo(() => {
     return {
-      signUp: () => {
+      signUp: (email) => {
+        setEmail(email);
         setFirstTime(!firstTime);
       },
       signIn: () => {
+        setEmail(email);
         setUserToken("token");
       },
       signOut: () => {

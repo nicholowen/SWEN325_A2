@@ -5,7 +5,7 @@ import { StackActions, NavigationActions } from "react-navigation";
 import { AuthContext } from "../functions/Context";
 import { colors } from "../utility/Colors";
 
-import Page from "./components/Page";
+import Page from "../components/Page";
 import Footer from "../components/Footer";
 
 //uses ViewPager library to enable two pages to be rendered on the same screen

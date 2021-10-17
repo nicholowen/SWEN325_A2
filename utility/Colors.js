@@ -8,5 +8,5 @@ export const colors = {
   textInput: "#ffe5a3",
   delete: "#cd1212",
   aquariumDisplayFooter: "#678ab0",
-  placeholder: "003f5c",
+  placeholder: "#003f5c",
 };

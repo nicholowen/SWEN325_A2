@@ -1,12 +1,13 @@
-import * as React from "react";
-import MediaLibrary from "expo-media-library";
-import { StyleSheet, Text, View, Image, Button } from "react-native";
-import { saveImage } from "./AquariumDetail";
-import { updateAquarium, uploadImage } from "../api/FirebaseApi";
+import React, { useContext } from "react";
+import { View, Image, Button } from "react-native";
+import { uploadImage } from "../api/FirebaseApi";
+import { AuthContext } from "../functions/Context";
 
 //displays image taken by the camera
 
 const ImageScreen = (props) => {
+  const { getEmail } = useContext(AuthContext);
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Image
@@ -14,23 +15,22 @@ const ImageScreen = (props) => {
         style={{ width: 380, height: 550 }}
       />
       <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        height: "10%",
-        opacity: 0.6,
-        alignItems: 'center',
-        paddingHorizontal: 10
-      }}
-    >
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-evenly",
+          height: "10%",
+          opacity: 0.6,
+          alignItems: "center",
+          paddingHorizontal: 10,
+        }}
+      >
         <Button
           title="Save"
           onPress={() => {
-            uploadImage(props.route.params.image, "imagename.jpg")
-
-            props.route.params.aquarium.imageUrl =
-            props.route.params.image;
-            updateAquarium(props.route.params.aquarium);
+            uploadImage(
+              props.route.params.image,
+              props.route.params.aquarium.id
+            );
             props.navigation.pop(2);
           }}
         />

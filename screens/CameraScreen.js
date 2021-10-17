@@ -8,6 +8,8 @@ const CameraScreen = (props) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [cameraRef, setCameraRef] = useState(null);
+
+  //checks permission status and sets hook
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();

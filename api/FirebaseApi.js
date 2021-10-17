@@ -1,9 +1,11 @@
 import { setStatusBarBackgroundColor } from "expo-status-bar";
 import * as firebase from "firebase";
+import "firebase/storage";
 import { useState } from "react";
 import Aquarium from "../models/Aquarium";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { storage } from "@react-native-firebase/storage";
+import { generateUUID } from "../utility/UtilityFunctions";
 
 const aquariumList = [];
 const temp = [];
@@ -75,7 +77,6 @@ export function setUserProfile(username, displayName, noAquariums) {
 
 //adds a document to the database. Contains all information entered when creating a new aquarium
 export function addAquarium(aquarium) {
-
   firebase
     .firestore()
     .collection("users")
@@ -107,7 +108,6 @@ export function addAquarium(aquarium) {
 
 //general function to update all fields in the aquarium document
 export function updateAquarium(aquarium) {
-
   firebase
     .firestore()
     .collection("users")
@@ -157,7 +157,6 @@ export async function getAquarium() {
 
 //deletes aquarium
 export function deleteAquarium(aquarium) {
-
   firebase
     .firestore()
     .collection("users")
@@ -171,13 +170,30 @@ export function deleteAquarium(aquarium) {
 }
 
 //**Incomplete*// uploads and image to firebase storage - could not get it working
-export function uploadImage(path, imageName) {
-  let reference = storage().ref(imageName);
-  let task = reference.putFile(path);
+export async function uploadImage(uri, id) {
+  const response = await fetch(uri);
+  const blob = await response.blob();
 
-  task
-    .then(() => {
-      console.log("Image uploaded to the bucket!");
-    })
-    .catch((e) => console.log("uploading image error => ", e));
+  const imageid = generateUUID(4);
+
+  const path =
+    "users/" + username + "/Aquariums/" + id + "/image_" + imageid + ".jpg";
+  console.log(path);
+  var ref = firebase.storage().ref().child(path);
+
+  if (await ref.put(blob)) {
+    ref.getDownloadURL().then((url) => {
+      console.log(url);
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(username)
+        .collection("Aquariums")
+        .doc(id)
+        .update({
+          imageUrl: url,
+        });
+    });
+  }
 }
+

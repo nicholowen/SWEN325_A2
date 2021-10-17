@@ -13,6 +13,8 @@ import {
 import { colors } from "../utility/Colors";
 import { generateUUID } from "../utility/UtilityFunctions";
 import Icon from "react-native-vector-icons/Ionicons";
+// import * as ImagePicker from "expo-image-picker";
+import { pickImage } from "../utility/ImagePicker";
 
 //api calls
 import { updateAquarium, deleteAquarium } from "../api/FirebaseApi";
@@ -29,6 +31,8 @@ const AquariumDetail = (props) => {
   const [input, setInput] = useState("");
   const [image, setImage] = useState("");
   const [inhabitantList, setInhabitantList] = useState([]);
+
+  
 
   const showModal = (param) => {
     setField(param);
@@ -162,7 +166,18 @@ const AquariumDetail = (props) => {
             source={{
               uri: "https://cdn.pixabay.com/photo/2021/01/14/20/32/fish-5917864_960_720.jpg",
             }}
-            />
+            >
+              <View style={{ position: "absolute", top: 0, right: 0 }}>
+                  <Icon.Button
+                    style={{ alignSelf: "center" }}
+                    name="md-camera"
+                    size={15}
+                    onPress={() => {
+                      setIsCameraModalVisible(true);
+                    }}
+                  />
+                  </View>
+            </ImageBackground>
           )}
 
           <View style={styles.list}>
@@ -327,7 +342,7 @@ const AquariumDetail = (props) => {
         }}
         onGallery={() => {
           setIsCameraModalVisible(false);
-          props.navigation.navigate("CameraScreen", thisAquarium);
+          pickImage(props);
         }}
         onCamera={() => {
           props.navigation.navigate("CameraScreen", thisAquarium);

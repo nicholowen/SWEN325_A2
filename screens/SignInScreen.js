@@ -61,7 +61,7 @@ const SignIn = (props) => {
           style={styles.loginBtn}
           onPress={() => {
             loginUser(email, password);
-            signIn();
+            signIn(email);
           }}
         >
           <Text style={styles.loginText}>LOGIN</Text>
@@ -86,7 +86,7 @@ const SignIn = (props) => {
                   );
                 }
               }
-              signUp();
+              signUp(email);
             }
           }}
         >

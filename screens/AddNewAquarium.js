@@ -30,7 +30,36 @@ import InhabitantListItem from "../components/InhabitantListItem";
 var inhabitantName = [];
 
 const AddNewAquarium = (props) => {
+  
+  
+  
+  //state hooks
+  const [nameInput, setNameInput] = useState("");
+  const [widthInput, setWidthInput] = useState("");
+  const [heightInput, setHeightInput] = useState("");
+  const [depthInput, setDepthInput] = useState("");
+  const [volumeInput, setVolumeInput] = useState("");
+  
+  const [ammoniaInput, setAmmoniaInput] = useState("");
+  const [PHInput, setPHInput] = useState("");
+  const [nitratesInput, setNitratesInput] = useState("");
+  const [nitritesInput, setNitritesInput] = useState("");
+  const [salinityInput, setSalinityInput] = useState("");
+  const [co2Input, setCo2Input] = useState("");
+  const [typeInput, setTypeInput] = useState("");
+  
+  const [inhabitantInput, setInhabitantInput] = useState([]);
+  const [quantityInput, setQuantityInput] = useState("");
+  const [inhabitantNameEdit, setInhabitantNameEdit] = useState("");
+  const [inhabitantQuanEdit, setInhabitantQuanEdit] = useState(0);
+  const [inhabitantEditIndex, setInhabitantEditIndex] = useState("");
+  
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  
   const [image, setImage] = useState(null);
+
+  var inhabitantInputs = [];
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -42,35 +71,9 @@ const AddNewAquarium = (props) => {
     }
   };
 
-  //state hooks
-  const [nameInput, setNameInput] = useState("");
-  const [widthInput, setWidthInput] = useState("");
-  const [heightInput, setHeightInput] = useState("");
-  const [depthInput, setDepthInput] = useState("");
-  const [volumeInput, setVolumeInput] = useState("");
-
-  const [ammoniaInput, setAmmoniaInput] = useState("");
-  const [PHInput, setPHInput] = useState("");
-  const [nitratesInput, setNitratesInput] = useState("");
-  const [nitritesInput, setNitritesInput] = useState("");
-  const [salinityInput, setSalinityInput] = useState("");
-  const [co2Input, setCo2Input] = useState("");
-  const [typeInput, setTypeInput] = useState("");
-
-  const [inhabitantInput, setInhabitantInput] = useState([]);
-  const [quantityInput, setQuantityInput] = useState("");
-  const [inhabitantNameEdit, setInhabitantNameEdit] = useState("");
-  const [inhabitantQuanEdit, setInhabitantQuanEdit] = useState(0);
-  const [inhabitantEditIndex, setInhabitantEditIndex] = useState("");
-
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  var inputs = [];
-
   //create list for the addded inhabitants on screen
   for (let i = 0; i < inhabitantName.length; i++) {
-    inputs.push(
+    inhabitantInputs.push(
       <InhabitantListItem
         key={inhabitantName[i].id}
         name={inhabitantName[i].inhabitant}
@@ -157,10 +160,9 @@ const AddNewAquarium = (props) => {
           <Text style={styles.subTitle}>Type:</Text>
           <View style={styles.radioContainer}>
             <TypeRadioButtons
-              selectedBtn={(value) => {
-                setTypeInput(value.label);
-                // console.log(value.label)
-              }}
+              selectedBtn={(value) => 
+                setTypeInput(value.label)
+              }
             />
           </View>
           <View style={{ flexDirection: "row" }}>
@@ -176,7 +178,7 @@ const AddNewAquarium = (props) => {
               />
             </View>
           </View>
-          {inputs} {/* list of inhabitants */}
+          {inhabitantInputs}
           <View style={styles.submitButton}>
             <Button
               title="Add Aquarium"
